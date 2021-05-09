@@ -15,11 +15,11 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->string('email', 50)->unique();
-            $table->string('password', 50);
-            $table->string('name', 100)->unique();
-            $table->boolean('is_publisher')->default(false);
+            $table->string('email', 100)->unique();
+            $table->string('login', 100)->unique();
+            $table->string('password', 100);
             $table->text('about')->nullable();
+            $table->boolean('is_publisher')->default(false);
             $table->timestamps();
         });
     }

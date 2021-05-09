@@ -1,0 +1,16 @@
+#body {
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 56px;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.required:after {
+    color: red;
+    content: " *";
+}
