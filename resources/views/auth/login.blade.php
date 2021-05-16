@@ -18,7 +18,7 @@
                                id="inputLogin"
                                aria-describedby="loginHelp"
                                value="{{ old('login') }}">
-                        <small id="loginHelp" class="form-text text-muted">Введите логин или email</small>
+                        <small id="loginHelp" class="form-text text-muted-light">Введите логин или email</small>
                     </div>
                     <div class="form-group">
                         <label for="inputPassword" class="required">Пароль</label>

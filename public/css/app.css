@@ -1,7 +1,66 @@
+hr {
+    background-color: #b1b1b1;
+}
+
+.text-muted-light {
+    color: #e3e3e3;
+}
+
+.form-control
+{
+    background-color: transparent;
+    border: 1px solid #b1b1b1;
+    color: #f8f9fa;
+}
+
+.form-control:focus {
+    background-color: transparent;
+    outline: none !important;
+    border: 1px solid #6c91b3;
+    box-shadow: 0 0 10px #6c91b3;
+    color: #f8f9fa;
+}
+
+.form-control.is-invalid {
+    border: 1px solid #ff6161;
+    background-image: none;
+}
+
+.form-control.is-invalid:focus {
+    border: 1px solid #ff6161;
+    box-shadow: 0 0 10px #ff6161;
+}
+
+.form-control:-webkit-autofill,
+.form-control:-webkit-autofill:hover,
+.form-control:-webkit-autofill:focus,
+.form-control.is-invalid:-webkit-autofill,
+.form-control.is-invalid:-webkit-autofill:hover,
+.form-control.is-invalid:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 100px #3d4661 inset;
+    -webkit-text-fill-color: #f8f9fa;
+    border: 1px solid #b1b1b1;
+}
+
+.form-control:-webkit-autofill:focus,
+.form-control.is-invalid:-webkit-autofill:focus {
+    border: 1px solid #7688c2;
+    -webkit-box-shadow: 0 0 0 100px #3d4661 inset, 0 0 10px #7688c2;
+}
+
+.alert-danger {
+    background-color: rgb(170, 79, 80);
+    color: #f5c6cb;
+}
+
 #body {
     position: relative;
     min-height: 100vh;
     padding-bottom: 56px;
+    background: #536976; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #292E49, #536976); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #292E49, #536976); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-attachment: fixed;
 }
 
 #footer {
@@ -11,6 +70,6 @@
 }
 
 .required:after {
-    color: red;
+    color: #f34c4c;
     content: " *";
 }

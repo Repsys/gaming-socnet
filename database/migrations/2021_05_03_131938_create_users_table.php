@@ -15,14 +15,13 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50)->nullable();
-            $table->string('surname', 50)->nullable();
-        });
+            $table->string('name', 100)->nullable();
+            $table->string('surname', 100)->nullable();
+            $table->text('about')->nullable();
 
-        Schema::table('accounts', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->nullable()->unique();
-            $table->foreign('user_id')
-                ->references('id')->on('users')
+            $table->unsignedBigInteger('account_id')->unique();
+            $table->foreign('account_id')
+                ->references('id')->on('accounts')
                 ->onDelete('cascade');
         });
     }

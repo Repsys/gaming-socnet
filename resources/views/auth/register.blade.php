@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col col-md-8 mx-auto">
-                <h1 class="mb-3 text-center">Регистрация</h1>
+                <h1 class="mb-3 text-center">@yield('title')</h1>
                 <hr>
                 <form method="POST" action="{{route('register_post')}}">
                     @csrf
@@ -17,7 +17,7 @@
                                class="form-control {{$errors->has('login') ? 'is-invalid' : ''}}"
                                id="inputLogin" aria-describedby="loginHelp"
                                value="{{ old('login') }}">
-                        <small id="loginHelp" class="form-text text-muted">Будет отображаться в URL</small>
+                        <small id="loginHelp" class="form-text text-muted-light">Будет отображаться в URL</small>
                     </div>
                     <div class="form-group">
                         <label for="inputEmail" class="required">Email</label>
@@ -33,8 +33,8 @@
                     </div>
                     <div class="form-group">
                         <label for="inputConfirmPassword" class="required">Подтвердите пароль</label>
-                        <input name="confirm_password" type="password"
-                               class="form-control {{$errors->has('confirm_password') ? 'is-invalid' : ''}}"
+                        <input name="password_confirmation" type="password"
+                               class="form-control {{$errors->has('password_confirmation') ? 'is-invalid' : ''}}"
                                id="inputConfirmPassword">
                     </div>
                     <div class="form-check">

@@ -41,7 +41,7 @@ class LoginController extends Controller
         }
 
         $request->session()->regenerate();
-        return redirect()->route('main');
+        return redirect()->route('profile');
     }
 
     public function logout(Request $request)

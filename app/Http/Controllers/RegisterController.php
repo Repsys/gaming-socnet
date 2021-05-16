@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\Publisher;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -18,9 +21,9 @@ class RegisterController extends Controller
     {
         $request->validate([
             'login' => 'required|min:4|max:100|unique:accounts',
-            'email' => 'required|min:3|max:100|email|unique:accounts',
+            'email' => 'required|email|max:100|unique:accounts',
             'password' => 'required|min:8|max:100',
-            'confirm_password' => 'required|min:8|max:100|same:password',
+            'password_confirmation' => 'required|same:password',
         ]);
 
         $account = new Account($request->all());

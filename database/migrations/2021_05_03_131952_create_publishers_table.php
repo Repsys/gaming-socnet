@@ -15,13 +15,12 @@ class CreatePublishersTable extends Migration
     {
         Schema::create('publishers', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 150);
-        });
+            $table->string('name', 100);
+            $table->text('about')->nullable();
 
-        Schema::table('accounts', function (Blueprint $table) {
-            $table->unsignedBigInteger('publisher_id')->nullable()->unique();
-            $table->foreign('publisher_id')
-                ->references('id')->on('publishers')
+            $table->unsignedBigInteger('account_id')->unique();
+            $table->foreign('account_id')
+                ->references('id')->on('accounts')
                 ->onDelete('cascade');
         });
     }

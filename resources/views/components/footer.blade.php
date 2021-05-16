@@ -1,4 +1,4 @@
-<footer id="footer">
+<footer id="footer" class="shadow">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <ul class="navbar-nav mx-auto">
             <li class="nav-item">

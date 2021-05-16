@@ -18,7 +18,6 @@ class CreateAccountsTable extends Migration
             $table->string('email', 100)->unique();
             $table->string('login', 100)->unique();
             $table->string('password', 100);
-            $table->text('about')->nullable();
             $table->boolean('is_publisher')->default(false);
             $table->timestamps();
         });

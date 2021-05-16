@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/app.css">
     <title>@yield('title') - {{env('APP_NAME')}}</title>
 </head>
-<body id="body">
+<body id="body" class="text-light">
 @include('components.header')
 <section id="contentSection" class="py-5">
     @yield('content')

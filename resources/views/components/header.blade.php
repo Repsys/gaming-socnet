@@ -1,4 +1,4 @@
-<header id="header">
+<header id="header" class="shadow">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5 py-3">
         <a class="navbar-brand" href="{{route('main')}}">{{env('APP_NAME')}}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
@@ -35,8 +35,12 @@
                             {{Auth::user()->login}}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">Профиль</a>
-                            <a class="dropdown-item" href="#">Подписки</a>
+                            <a class="dropdown-item" href="{{route('profile')}}">Профиль</a>
+                            @if(Auth::user()->is_publisher)
+                                <a class="dropdown-item" href="#">Проекты</a>
+                            @else
+                                <a class="dropdown-item" href="#">Подписки</a>
+                            @endif
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item text-danger" href="{{route('logout')}}">Выход</a>
                         </div>
