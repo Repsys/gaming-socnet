@@ -9,14 +9,18 @@
                 <h1 class="mb-3 text-center">@yield('title')</h1>
                 <hr>
                 @include('components.alerts')
-                <h5>Имя:</h5>
-                <p>{{$profile->name ?: 'Не указано'}}</p>
-
-                <h5>Фамилия:</h5>
-                <p>{{$profile->surname ?: 'Не указано'}}</p>
-
-                <h5>Обо мне</h5>
-                <p>{{$profile->about ?: 'Не указано'}}</p>
+                @include('components.output.output-field', [
+                        'label' => 'Имя',
+                        'value' => $profile->name
+                    ])
+                @include('components.output.output-field', [
+                        'label' => 'Фамилия',
+                        'value' => $profile->surname
+                    ])
+                @include('components.output.output-field', [
+                        'label' => 'Обо мне',
+                        'value' => $profile->about
+                    ])
             </div>
         </div>
     </div>

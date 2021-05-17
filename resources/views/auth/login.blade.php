@@ -11,26 +11,22 @@
                 <form method="POST" action="{{route('login_post')}}">
                     @csrf
                     @include('components.alerts')
-                    <div class="form-group">
-                        <label for="inputLogin" class="required">Логин</label>
-                        <input name="login" type="text"
-                               class="form-control {{$errors->has('login') ? 'is-invalid' : ''}}"
-                               id="inputLogin"
-                               aria-describedby="loginHelp"
-                               value="{{ old('login') }}">
-                        <small id="loginHelp" class="form-text text-muted-light">Введите логин или email</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword" class="required">Пароль</label>
-                        <input name="password" type="password"
-                               class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}" id="inputPassword">
-                    </div>
-                    <div class="form-check">
-                        <input name="check_me_out" type="checkbox"
-                               class="form-check-input"
-                               id="inputCheckMeOut">
-                        <label class="form-check-label" for="inputCheckMeOut">Запомнить меня</label>
-                    </div>
+                    @include('components.form.input-field', [
+                        'label' => 'Логин',
+                        'name' => 'login',
+                        'required' => true,
+                        'help' => 'Введите логин или email'
+                    ])
+                    @include('components.form.input-field', [
+                        'label' => 'Пароль',
+                        'name' => 'password',
+                        'type' => 'password',
+                        'required' => true
+                    ])
+                    @include('components.form.checkbox-field', [
+                       'label' => 'Запомнить меня',
+                       'name' => 'check_me_out'
+                   ])
                     <div class="mt-4">
                         <button type="submit" class="btn btn-success px-5 mr-2">Войти</button>
                         <a href="{{route('register')}}" class="btn btn-primary px-5" role="button">Регистрация</a>

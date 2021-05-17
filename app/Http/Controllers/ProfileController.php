@@ -49,9 +49,9 @@ class ProfileController extends Controller
         if ($account->is_publisher) {
             Validator::validate($request->all(), [
                 'name' => 'required|min:4|max:100',
-                'about' => 'max:2000',
+                'about' => 'nullable|max:2000',
             ], [], [
-                'name' => 'Название',
+                'name' => 'Название издательства',
                 'about' => 'Об издательстве',
             ]);
 
@@ -60,9 +60,9 @@ class ProfileController extends Controller
             $publisher->save();
         } else {
             Validator::validate($request->all(), [
-                'name' => 'min:2|max:100',
-                'surname' => 'min:2|max:100',
-                'about' => 'max:2000',
+                'name' => 'nullable|min:2|max:100',
+                'surname' => 'nullable|min:2|max:100',
+                'about' => 'nullable|max:2000',
             ], [], [
                 'name' => 'Имя',
                 'surname' => 'Фамилия',

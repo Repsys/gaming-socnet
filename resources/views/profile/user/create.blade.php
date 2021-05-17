@@ -12,26 +12,20 @@
                 <form method="POST" action="{{route('profile-create_post')}}">
                     @csrf
                     @include('components.alerts')
-                    <div class="form-group">
-                        <label for="inputName">Имя</label>
-                        <input name="name" type="text"
-                               class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}"
-                               id="inputName"
-                               value="{{ old('name') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputSurname">Фамилия</label>
-                        <input name="surname" type="text"
-                               class="form-control {{$errors->has('surname') ? 'is-invalid' : ''}}"
-                               id="inputSurname"
-                               value="{{ old('surname') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputAbout">Обо мне</label>
-                        <textarea name="about" maxlength="2000"
-                                  class="form-control {{$errors->has('about') ? 'is-invalid' : ''}}"
-                                  id="inputAbout" rows="5">{{ old('about') ?? '' }}</textarea>
-                    </div>
+                    @include('components.form.input-field', [
+                        'label' => 'Имя',
+                        'name' => 'name'
+                    ])
+                    @include('components.form.input-field', [
+                        'label' => 'Фамилия',
+                        'name' => 'surname'
+                    ])
+                    @include('components.form.textarea-field', [
+                        'label' => 'Обо мне',
+                        'name' => 'about',
+                        'rows' => 5,
+                        'max' => 2000
+                    ])
                     <div class="mt-4">
                         <button type="submit" class="btn btn-success px-5">Сохранить</button>
                     </div>

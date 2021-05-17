@@ -12,19 +12,17 @@
                 <form method="POST" action="{{route('profile-create_post')}}">
                     @csrf
                     @include('components.alerts')
-                    <div class="form-group">
-                        <label for="inputName" class="required">Название</label>
-                        <input name="name" type="text"
-                               class="form-control {{$errors->has('name') ? 'is-invalid' : ''}}"
-                               id="inputName"
-                               value="{{ old('name') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputAbout">Об издательстве</label>
-                        <textarea name="about" maxlength="2000"
-                                  class="form-control {{$errors->has('about') ? 'is-invalid' : ''}}"
-                                  id="inputAbout" rows="5">{{ old('about') ?? '' }}</textarea>
-                    </div>
+                    @include('components.form.input-field', [
+                        'label' => 'Название издательства',
+                        'name' => 'name',
+                        'required' => true
+                    ])
+                    @include('components.form.textarea-field', [
+                        'label' => 'Об издательстве',
+                        'name' => 'about',
+                        'rows' => 5,
+                        'max' => 2000
+                    ])
                     <div class="mt-4">
                         <button type="submit" class="btn btn-success px-5">Сохранить</button>
                     </div>

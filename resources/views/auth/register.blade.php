@@ -11,38 +11,33 @@
                 <form method="POST" action="{{route('register_post')}}">
                     @csrf
                     @include('components.alerts')
-                    <div class="form-group">
-                        <label for="inputLogin" class="required">Логин</label>
-                        <input name="login" type="text"
-                               class="form-control {{$errors->has('login') ? 'is-invalid' : ''}}"
-                               id="inputLogin" aria-describedby="loginHelp"
-                               value="{{ old('login') }}">
-                        <small id="loginHelp" class="form-text text-muted-light">Будет отображаться в URL</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputEmail" class="required">Email</label>
-                        <input name="email" type="text"
-                               class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}"
-                               id="inputEmail" value="{{ old('email') }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword" class="required">Пароль</label>
-                        <input name="password" type="password"
-                               class="form-control {{$errors->has('password') ? 'is-invalid' : ''}}"
-                               id="inputPassword">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputConfirmPassword" class="required">Подтвердите пароль</label>
-                        <input name="password_confirmation" type="password"
-                               class="form-control {{$errors->has('password_confirmation') ? 'is-invalid' : ''}}"
-                               id="inputConfirmPassword">
-                    </div>
-                    <div class="form-check">
-                        <input name="is_publisher" type="checkbox"
-                               class="form-check-input"
-                               id="inputIsPublisher" {{ old('is_publisher') ? 'checked="checked"' : '' }}>
-                        <label class="form-check-label" for="inputIsPublisher">Аккаунт Издателя</label>
-                    </div>
+                    @include('components.form.input-field', [
+                        'label' => 'Логин',
+                        'name' => 'login',
+                        'required' => true,
+                        'help' => 'Будет отображаться в URL'
+                    ])
+                    @include('components.form.input-field', [
+                        'label' => 'Email',
+                        'name' => 'email',
+                        'required' => true
+                    ])
+                    @include('components.form.input-field', [
+                        'label' => 'Пароль',
+                        'name' => 'password',
+                        'type' => 'password',
+                        'required' => true
+                    ])
+                    @include('components.form.input-field', [
+                        'label' => 'Подтвердите пароль',
+                        'name' => 'password_confirmation',
+                        'type' => 'password',
+                        'required' => true
+                    ])
+                    @include('components.form.checkbox-field', [
+                       'label' => 'Аккаунт Издателя',
+                       'name' => 'is_publisher'
+                   ])
                     <div class="mt-4">
                         <button type="submit" class="btn btn-success px-5">Создать аккаунт</button>
                     </div>
