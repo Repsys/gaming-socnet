@@ -2,44 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileRequest;
+use App\Models\Account;
 use App\Models\Publisher;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
-    public function index()
+    public function index(Request $request, $login = null)
     {
         $account = Auth::user();
-
-        if (!$account->profile()->exists()) {
-            return $this->create();
+        $isOwner = $account->login == ($login ?: $account->login);
+        if ($account && $isOwner) {
+            if (!$account->profile()->exists()) {
+                if ($account->is_publisher) {
+                    return view('profile.publisher.create');
+                } else {
+                    return view('profile.user.create');
+                }
+            }
+            $accData = [
+                'account' => $account,
+                'profile' => $account->profile,
+            ];
+        } else {
+            $accData = Account::getAccountDataByLogin($login);
         }
 
-        $data = [
-            'account' => $account,
-            'profile' => $account->profile,
-        ];
-
-        if ($account->is_publisher) {
-            return view('profile.publisher.index', $data);
+        if ($accData['account']->is_publisher) {
+            return view('profile.publisher.index', $accData);
         } else {
-            return view('profile.user.index', $data);
-        }
-    }
-
-    public function create()
-    {
-        $account = Auth::user();
-
-        if ($account->is_publisher) {
-            return view('profile.publisher.create');
-        } else {
-            return view('profile.user.create');
+            return view('profile.user.index', $accData);
         }
     }
 

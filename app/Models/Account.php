@@ -18,6 +18,7 @@ use Illuminate\Notifications\Notifiable;
  * @property bool $is_publisher
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $avatar
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \App\Models\Publisher|null $publisher
@@ -25,6 +26,7 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|Account newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Account newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Account query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Account whereAvatar($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Account whereId($value)
@@ -63,6 +65,26 @@ class Account extends Authenticatable
             return $this->publisher();
 
         return $this->user();
+    }
+
+    /**
+     * Получить информацию об аккаунте и его профиле по логину
+     * @param $login
+     * @return array
+     */
+    public static function getAccountDataByLogin($login) : array
+    {
+        $account = Account::whereLogin($login)->first();
+
+        if (!$account || !$account->profile) {
+            abort(404, "The Account was not found");
+        }
+
+        $data = [
+            'account' => $account,
+            'profile' => $account->profile,
+        ];
+        return $data;
     }
 
 }

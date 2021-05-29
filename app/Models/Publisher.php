@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\Publisher
  *
  * @property int $id
- * @property string|null $name
+ * @property string $name
  * @property string|null $about
  * @property int $account_id
  * @property-read \App\Models\Account $account

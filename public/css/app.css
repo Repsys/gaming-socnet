@@ -73,3 +73,28 @@ hr {
     color: #f34c4c;
     content: " *";
 }
+
+.avatar {
+    max-height: 100px;
+    max-width: 100px;
+    min-height: 100px;
+    min-width: 100px;
+    object-fit: cover;
+}
+
+.avatar-profile {
+    border: 1px solid #b1b1b1;
+    border-bottom: none;
+}
+
+.card > * {
+    color: #e3e3e3 !important;
+}
+
+.card-link {
+    color: #e3e3e3 !important;
+}
+
+.card-link:hover {
+    color: #b1b1b1 !important;
+}

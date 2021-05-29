@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5 py-3">
         <a class="navbar-brand" href="{{route('main')}}">{{env('APP_NAME')}}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarContent">
@@ -14,7 +14,7 @@
                     <a class="nav-link" href="#">Проекты</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Издательства</a>
+                    <a class="nav-link" href="{{route('publishers')}}">Издательства</a>
                 </li>
             </ul>
             <form class="form-inline mr-5">

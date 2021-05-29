@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ForumController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MainController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\RegisterPublisherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,8 +32,20 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::post('/profile', [ProfileController::class, 'create_post'])->name('profile-create_post');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile-edit');
     Route::put('/profile/edit', [ProfileController::class, 'edit_put'])->name('profile-edit_put');
+
 });
+
+Route::get('/profile/{login?}', [ProfileController::class, 'index'])->name('profile');
+
+Route::get('/publishers', [PublisherController::class, 'index'])->name('publishers');
+
+// Блог
+Route::get('/profile/{login}/blog', [BlogController::class, 'index'])->name('blog');
+
+// Форум
+Route::get('/projects/{id}/forum', [ForumController::class, 'index'])->name('forum');
+
+
