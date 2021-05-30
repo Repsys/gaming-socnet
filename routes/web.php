@@ -38,15 +38,14 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::get('/profile/{login?}', [ProfileController::class, 'index'])->name('profile');
+Route::get('/profile/{login?}/{content?}', [ProfileController::class, 'index'])->name('profile');
+//Route::get('/profile/{login}/about', [ProfileController::class, 'about'])->name('profile-about');
+//Route::get('/profile/{login}/blog', [BlogController::class, 'index'])->name('profile-blog');
+//Route::get('/profile/{login}/projects', [ProjectController::class, 'index'])->name('profile-projects');
 
 Route::get('/publishers', [PublisherController::class, 'index'])->name('publishers');
+Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
 
-// Блог
-Route::get('/profile/{login}/blog', [BlogController::class, 'index'])->name('blog');
-
-// Блог
-Route::get('/profile/{login}/projects', [ProjectController::class, 'index'])->name('projects');
 
 // Форум
 Route::get('/projects/{id}/forum', [ForumController::class, 'index'])->name('forum');

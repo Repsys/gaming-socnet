@@ -2,28 +2,24 @@
 
 @section('profile-nav')
     <li class="nav-item">
-        <a class="nav-link" href="{{route('profile')}}">Блог</a>
+        <a class="nav-link {{$content == 'blog' ? 'active' : ''}}"
+           href="{{route('profile', ['login' => $account->login, 'content' => 'blog'])}}">Блог</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Подписки</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">О пользователе</a>
+        <a class="nav-link {{$content == 'about' ? 'active' : ''}}"
+           href="{{route('profile', ['login' => $account->login, 'content' => 'about'])}}">О пользователе</a>
     </li>
 @endsection
 
 @section('profile-content')
-    @include('components.output.output-field', [
-                        'label' => 'Имя',
-                        'value' => $profile->name ?? ''
-                    ])
-    @include('components.output.output-field', [
-            'label' => 'Фамилия',
-            'value' => $profile->surname ?? ''
-        ])
-    @include('components.output.output-field', [
-            'label' => 'Обо мне',
-            'value' => $profile->about ?? ''
-        ])
+    @switch($content)
+        @case('blog')
+            @include('profile.blog.index')
+            @break
+        @case('about')
+            @include('profile.user.about')
+            @break
+        @default
+    @endswitch
 @endsection
 

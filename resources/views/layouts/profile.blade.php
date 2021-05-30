@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('title', 'Профиль')
+@section('title', 'Профиль '.$account->login)
 
 @section('content')
     <div class="container">

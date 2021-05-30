@@ -14,7 +14,7 @@
                     <a class="nav-link" href="#">Проекты</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('publishers')}}">Издательства</a>
+                    <a class="nav-link" href="{{route('publishers')}}">Издатели</a>
                 </li>
             </ul>
             <form class="form-inline mr-5">

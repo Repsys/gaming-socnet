@@ -9,8 +9,11 @@ class BlogController extends Controller
 {
     public function index(Request $request, $login)
     {
-        $accData = Account::getAccountDataByLogin($login);
+        $account = Account::whereLogin($login)->first();
+        $posts = $account->blogPosts;
 
-        return view('blog.index', $accData);
+        return redirect()->route('profile', ['login' => $login])
+            ->with('content', 'blog')
+            ->with('posts', $posts);
     }
 }

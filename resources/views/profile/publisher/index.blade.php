@@ -2,23 +2,30 @@
 
 @section('profile-nav')
     <li class="nav-item">
-        <a class="nav-link" href="{{route('profile', ['login' => $account->login])}}">Блог</a>
+        <a class="nav-link {{$content == 'blog' ? 'active' : ''}}"
+           href="{{route('profile', ['login' => $account->login, 'content' => 'blog'])}}">Блог</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{route('projects', ['login' => $account->login])}}">Проекты</a>
+        <a class="nav-link {{$content == 'projects' ? 'active' : ''}}"
+           href="{{route('profile', ['login' => $account->login, 'content' => 'projects'])}}">Проекты</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Об издателе</a>
+        <a class="nav-link {{$content == 'about' ? 'active' : ''}}"
+           href="{{route('profile', ['login' => $account->login, 'content' => 'about'])}}">Об издателе</a>
     </li>
 @endsection
 
 @section('profile-content')
-    @include('components.output.output-field', [
-            'label' => 'Название',
-            'value' => $profile->name ?? ''
-        ])
-    @include('components.output.output-field', [
-            'label' => 'Об издательстве',
-            'value' => $profile->about ?? ''
-        ])
+    @switch($content)
+        @case('blog')
+            @include('profile.blog.index')
+            @break
+        @case('projects')
+            @include('profile.publisher.projects')
+            @break
+        @case('about')
+            @include('profile.publisher.about')
+            @break
+        @default
+    @endswitch
 @endsection

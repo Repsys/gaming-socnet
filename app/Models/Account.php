@@ -67,8 +67,13 @@ class Account extends Authenticatable
         return $this->user();
     }
 
+    public function blogPosts()
+    {
+        return $this->hasMany(BlogPost::class);
+    }
+
     /**
-     * Получить информацию об аккаунте
+     * Получить информацию об аккаунте и его профиле
      * @param $login
      * @return array
      */

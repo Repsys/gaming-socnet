@@ -5,14 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Models\Publisher;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
-    public function index(Request $request, $login = null)
+    public function index(Request $request, $login = null, $content = 'blog')
     {
         $account = Auth::user();
 
@@ -32,13 +31,44 @@ class ProfileController extends Controller
             $accData = Account::getAccountDataByLogin($login);
         }
 
+        $data = [];
         if ($accData['account']->is_publisher) {
-            $view = view('profile.publisher.index', $accData);
+            $view = view('profile.publisher.index');
+            switch ($content) {
+                case 'blog':
+                    $data = $this->getProfileBlogData($accData['account']);
+                    break;
+                case 'projects':
+                    $data = $this->getPublisherProjectsData($accData['account']);
+                    break;
+                case 'about':
+                    break;
+                default:
+                    abort(404);
+            }
         } else {
-            $view = view('profile.user.index', $accData);
+            $view = view('profile.user.index');
+            switch ($content) {
+                case 'blog':
+                    $data = $this->getProfileBlogData($accData['account']);
+                    break;
+                case 'about':
+                    break;
+                default:
+                    abort(404);
+            }
         }
 
-        return $view->with(['isOwner' => $isOwner]);
+        return $view->with($accData)
+            ->with($data)
+            ->with('isOwner', $isOwner)
+            ->with('content', $content);
+    }
+
+    public function about(Request $request, $login)
+    {
+        return redirect()->route('profile', ['login' => $login])
+            ->with('content', 'about');
     }
 
     public function edit(Request $request)
@@ -103,6 +133,24 @@ class ProfileController extends Controller
         }
         return redirect()->route('profile')
             ->with('success', 'Профиль успешно сохранён!');
+    }
+
+    protected function getProfileBlogData($account)
+    {
+        $posts = $account->blogPosts;
+
+        return [
+            'posts' => $posts
+        ];
+    }
+
+    protected function getPublisherProjectsData($account)
+    {
+        $projects = $account->publisher->projects;
+
+        return [
+            'projects' => $projects
+        ];
     }
 
     protected function redirectIfNoProfile($account)
