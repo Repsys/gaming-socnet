@@ -5,13 +5,18 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-12 d-flex align-items-end">
+            <div class="col-auto pr-0">
                 <img
                     src="https://gif.cmtt.space/3/paper-media/c/cicada-3301/89c4afba146f34f98bd2.jpg"
                     class="avatar avatar-profile">
-                <div class="ml-3">
-                    <h3 class="card-title">{{$profile->name ?: $account->login}}</h3>
-                </div>
+            </div>
+            <div class="col-auto pl-0 align-self-end">
+                <h3 class="card-title ml-3 mb-2">{{$profile->name ?: $account->login}}</h3>
+            </div>
+            <div class="col align-self-end">
+                @if($isOwner)
+                    <a class="btn btn-primary mb-2 float-right" href="{{route('profile-edit')}}">Редактировать</a>
+                @endif
             </div>
         </div>
         <hr class="m-0">

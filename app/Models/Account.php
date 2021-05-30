@@ -68,6 +68,19 @@ class Account extends Authenticatable
     }
 
     /**
+     * Получить информацию об аккаунте
+     * @param $login
+     * @return array
+     */
+    public function getAccountData() : array
+    {
+        return [
+            'account' => $this,
+            'profile' => $this->profile,
+        ];
+    }
+
+    /**
      * Получить информацию об аккаунте и его профиле по логину
      * @param $login
      * @return array
@@ -80,11 +93,7 @@ class Account extends Authenticatable
             abort(404, "The Account was not found");
         }
 
-        $data = [
-            'account' => $account,
-            'profile' => $account->profile,
-        ];
-        return $data;
+        return $account->getAccountData();
     }
 
 }

@@ -5,7 +5,7 @@
         <a class="nav-link" href="{{route('profile', ['login' => $account->login])}}">Блог</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Проекты</a>
+        <a class="nav-link" href="{{route('projects', ['login' => $account->login])}}">Проекты</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#">Об издателе</a>

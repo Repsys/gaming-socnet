@@ -3,6 +3,7 @@
         $inputId = \Illuminate\Support\Str::camel($name).'Input';
         $required = isset($required) ? ($required ? 'required' : '') : false;
         $type = $type ?? 'text';
+        $value = $value ?? '';
         $isHelp = $help ?? false;
         $helpId = $isHelp ? $name.'Help' : null;
     @endphp
@@ -13,7 +14,7 @@
            aria-describedby="{{$helpId}}"
            @endif
            id="{{$inputId}}"
-           value="{{ old($name) }}">
+           value="{{ old($name) ?: $value}}">
 
     @if($isHelp)
         <small id="{{$helpId}}" class="form-text text-muted-light">{{$help}}</small>

@@ -2,6 +2,7 @@
     @php
         $inputId = \Illuminate\Support\Str::camel($name).'Input';
         $required = isset($required) ? ($required ? 'required' : '') : false;
+        $value = $value ?? '';
         $rows = $rows ?? 5;
         $max = $max ?? 2000;
         $isHelp = $help ?? false;
@@ -13,7 +14,7 @@
               @if($isHelp)
               aria-describedby="{{$helpId}}"
               @endif
-              id="{{$inputId}}">{{ old($name) ?? '' }}</textarea>
+              id="{{$inputId}}">{{ old($name) ?: $value }}</textarea>
 
     @if($isHelp)
         <small id="{{$helpId}}" class="form-text text-muted-light">{{$help}}</small>

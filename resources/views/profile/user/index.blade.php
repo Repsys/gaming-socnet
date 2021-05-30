@@ -2,7 +2,7 @@
 
 @section('profile-nav')
     <li class="nav-item">
-        <a class="nav-link" href="#">Блог</a>
+        <a class="nav-link" href="{{route('profile')}}">Блог</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="#">Подписки</a>

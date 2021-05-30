@@ -6,27 +6,30 @@
     <div class="container">
         <div class="row">
             <div class="col col-md-8 mx-auto">
-                <h1 class="mb-3 text-center">@yield('title')</h1>
+                <h1 class="mb-3 text-center">Профиль пользователя {{$account->login}}</h1>
                 <hr>
-                <p>Сперва заполните, пожалуйста, ваш профиль:</p>
-                <form method="POST" action="{{route('profile-create_post')}}">
+                <form method="POST" action="{{route('profile-edit_post')}}">
                     @csrf
                     @include('components.alerts')
                     @include('components.form.input-field', [
                         'label' => 'Имя',
-                        'name' => 'name'
+                        'name' => 'name',
+                        'value' => $profile->name ?? ''
                     ])
                     @include('components.form.input-field', [
                         'label' => 'Фамилия',
-                        'name' => 'surname'
+                        'name' => 'surname',
+                        'value' => $profile->surname ?? ''
                     ])
                     @include('components.form.textarea-field', [
                         'label' => 'Обо мне',
                         'name' => 'about',
+                        'value' => $profile->about ?? '',
                         'rows' => 5,
                         'max' => 2000
                     ])
                     <div class="mt-4">
+                        <a href="{{route('profile')}}" class="btn btn-secondary px-5 mr-2">Назад</a>
                         <button type="submit" class="btn btn-success px-5">Сохранить</button>
                     </div>
                 </form>
