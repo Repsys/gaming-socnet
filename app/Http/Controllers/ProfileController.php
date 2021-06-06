@@ -22,7 +22,7 @@ class ProfileController extends Controller
             return redirect()->route('profile', ['login' => $account->login]);
         }
 
-        $isOwner = $account->login == $login;
+        $isOwner = $account && $account->login == $login;
         if ($account && $isOwner) {
             $accData = $account->getAccountData();
             $redirect = $this->redirectIfNoProfile($account);
@@ -131,11 +131,11 @@ class ProfileController extends Controller
             }
             $user->save();
         }
-        return redirect()->route('profile')
+        return redirect()->route('profile', ['login' => $account->login])
             ->with('success', 'Профиль успешно сохранён!');
     }
 
-    protected function getProfileBlogData($account)
+    protected function getProfileBlogData(Account $account)
     {
         $posts = $account->blogPosts;
 
@@ -144,7 +144,7 @@ class ProfileController extends Controller
         ];
     }
 
-    protected function getPublisherProjectsData($account)
+    protected function getPublisherProjectsData(Account $account)
     {
         $projects = $account->publisher->projects;
 
@@ -153,7 +153,7 @@ class ProfileController extends Controller
         ];
     }
 
-    protected function redirectIfNoProfile($account)
+    protected function redirectIfNoProfile(Account $account)
     {
         if (!$account->profile()->exists()) {
             return redirect()->route('profile-edit');

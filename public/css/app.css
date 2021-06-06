@@ -3,7 +3,7 @@ hr {
 }
 
 .text-muted-light {
-    color: #e3e3e3;
+    color: #bfbfbf;
 }
 
 .form-control
@@ -72,6 +72,12 @@ hr {
 .required:after {
     color: #f34c4c;
     content: " *";
+}
+
+.blog-image {
+    max-height: 200px;
+    min-height: 200px;
+    object-fit: cover;
 }
 
 .avatar {

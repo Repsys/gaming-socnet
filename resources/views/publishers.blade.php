@@ -11,10 +11,10 @@
                 <div class="row">
                     @foreach($publishers as $publisher)
                         <div class="col-12 col-md-6 mb-4">
-                            <div class="card bg-dark shadow publisher-card">
+                            <div class="card bg-transparent shadow publisher-card">
                                 <div class="card-header p-0 d-flex align-items-end">
                                     <img
-                                        src="https://gif.cmtt.space/3/paper-media/c/cicada-3301/89c4afba146f34f98bd2.jpg"
+                                        src="https://image.flaticon.com/icons/png/512/168/168724.png"
                                         class="avatar">
                                     <div class="ml-3">
                                         <a href="{{route('profile', ['login' => $publisher->account->login])}}" class="card-link">

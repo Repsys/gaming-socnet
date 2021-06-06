@@ -1,5 +1,9 @@
 @extends('layouts.profile')
 
+{{--@section('profile-buttons')--}}
+{{--    --}}
+{{--@endsection--}}
+
 @section('profile-nav')
     <li class="nav-item">
         <a class="nav-link {{$content == 'blog' ? 'active' : ''}}"

@@ -4,12 +4,14 @@
         $required = isset($required) ? ($required ? 'required' : '') : false;
         $value = $value ?? '';
         $rows = $rows ?? 5;
-        $max = $max ?? 2000;
         $isHelp = $help ?? false;
         $helpId = $isHelp ? $name.'Help' : null;
     @endphp
     <label for="{{$inputId}}" class="{{$required}}">{{$label}}</label>
-    <textarea name="{{$name}}" rows="{{$rows}}" maxlength="{{$max}}"
+    <textarea name="{{$name}}" rows="{{$rows}}"
+              @if(isset($max))
+              maxlength="{{$max}}"
+              @endif
               class="form-control {{$errors->has($name) ? 'is-invalid' : ''}}"
               @if($isHelp)
               aria-describedby="{{$helpId}}"

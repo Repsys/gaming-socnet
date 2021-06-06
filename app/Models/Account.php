@@ -73,8 +73,29 @@ class Account extends Authenticatable
     }
 
     /**
+     * Получить полное имя аккаунта
+     * @return array
+     */
+    public function getFullName() : string
+    {
+        if ($this->is_publisher) {
+            $fullName = $this->profile->name;
+        } else {
+            if (isset($this->profile->name)) {
+                $fullName = $this->profile->name;
+                if (isset($this->profile->surname)) {
+                    $fullName .= ' ' . $this->profile->surname;
+                }
+            }
+        }
+        if (!isset($fullName)) {
+            $fullName = $this->login;
+        }
+        return $fullName;
+    }
+
+    /**
      * Получить информацию об аккаунте и его профиле
-     * @param $login
      * @return array
      */
     public function getAccountData() : array
@@ -82,6 +103,7 @@ class Account extends Authenticatable
         return [
             'account' => $this,
             'profile' => $this->profile,
+            'fullName' => $this->getFullName(),
         ];
     }
 

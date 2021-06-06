@@ -21,31 +21,48 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// Главная
 Route::get('/', [MainController::class, 'main'])->name('main');
 
 Route::middleware('guest')->group(function () {
+    // Авторизация
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'login'])->name('login_post');
+    // Регистрация
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
     Route::post('/register', [RegisterController::class, 'register'])->name('register_post');
-
 });
 
 Route::middleware('auth')->group(function () {
+    // Выход
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+    // Профиль
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile-edit');
     Route::post('/profile/edit', [ProfileController::class, 'edit_post'])->name('profile-edit_post');
 
+    // Блог
+    Route::get('/profile/blog/new', [BlogController::class, 'create'])->name('blog-create');
+    Route::post('/profile/blog/new', [BlogController::class, 'create_post'])->name('blog-create_post');
+
+    // Проекты
+    Route::get('/profile/projects/new', [ProjectController::class, 'create'])->name('projects-create');
+    Route::post('/profile/projects/new', [ProjectController::class, 'create_post'])->name('projects-create_post');
 });
 
+// Профиль
 Route::get('/profile/{login?}/{content?}', [ProfileController::class, 'index'])->name('profile');
-//Route::get('/profile/{login}/about', [ProfileController::class, 'about'])->name('profile-about');
-//Route::get('/profile/{login}/blog', [BlogController::class, 'index'])->name('profile-blog');
-//Route::get('/profile/{login}/projects', [ProjectController::class, 'index'])->name('profile-projects');
 
+// Разделы
 Route::get('/publishers', [PublisherController::class, 'index'])->name('publishers');
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
 
+// Блог
+Route::get('/profile/{login}/blog/{id}', [BlogController::class, 'get'])->name('blog-post');
+
+// Проекты
+Route::get('/projects/{name}', [ProjectController::class, 'get'])->name('projects-get');
 
 // Форум
 Route::get('/projects/{id}/forum', [ForumController::class, 'index'])->name('forum');
