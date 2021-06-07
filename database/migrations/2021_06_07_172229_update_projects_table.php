@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAvatarFieldToAccounts extends Migration
+class UpdateProjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddAvatarFieldToAccounts extends Migration
      */
     public function up()
     {
-        Schema::table('accounts', function (Blueprint $table) {
-            $table->string('avatar', 100)->nullable();
+        Schema::table('projects', function (Blueprint $table) {
+            $table->string('domain', 100)->unique();
+            $table->string('preview', 100)->nullable();
         });
     }
 
@@ -25,8 +26,9 @@ class AddAvatarFieldToAccounts extends Migration
      */
     public function down()
     {
-        Schema::table('accounts', function (Blueprint $table) {
-            $table->dropColumn('avatar');
+        Schema::table('projects', function (Blueprint $table) {
+            $table->dropColumn('preview');
+            $table->dropColumn('domain');
         });
     }
 }

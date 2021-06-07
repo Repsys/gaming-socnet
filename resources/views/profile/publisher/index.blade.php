@@ -8,12 +8,12 @@
 
 @section('profile-nav')
     <li class="nav-item">
-        <a class="nav-link {{$content == 'blog' ? 'active' : ''}}"
-           href="{{route('profile', ['login' => $account->login, 'content' => 'blog'])}}">Блог</a>
-    </li>
-    <li class="nav-item">
         <a class="nav-link {{$content == 'projects' ? 'active' : ''}}"
            href="{{route('profile', ['login' => $account->login, 'content' => 'projects'])}}">Проекты</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{$content == 'blog' ? 'active' : ''}}"
+           href="{{route('profile', ['login' => $account->login, 'content' => 'blog'])}}">Блог</a>
     </li>
     <li class="nav-item">
         <a class="nav-link {{$content == 'about' ? 'active' : ''}}"
@@ -27,7 +27,7 @@
             @include('profile.blog.index')
             @break
         @case('projects')
-            @include('profile.publisher.projects')
+            @include('projects.index')
             @break
         @case('about')
             @include('profile.publisher.about')

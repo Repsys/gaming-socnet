@@ -11,7 +11,7 @@
                     <a class="nav-link" href="{{route('main')}}">Главная</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Проекты</a>
+                    <a class="nav-link" href="{{route('projects')}}">Проекты</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('publishers')}}">Издатели</a>

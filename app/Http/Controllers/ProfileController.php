@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
-    public function index(Request $request, $login = null, $content = 'blog')
+    public function index(Request $request, $login = null, $content = null)
     {
         $account = Auth::user();
 
@@ -30,6 +30,8 @@ class ProfileController extends Controller
         } else {
             $accData = Account::getAccountDataByLogin($login);
         }
+
+        $content = $content ?? ($accData['account']->is_publisher ? 'projects' : 'blog');
 
         $data = [];
         if ($accData['account']->is_publisher) {
@@ -137,7 +139,9 @@ class ProfileController extends Controller
 
     protected function getProfileBlogData(Account $account)
     {
-        $posts = $account->blogPosts;
+        $posts = $account->blogPosts()
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return [
             'posts' => $posts
@@ -146,7 +150,9 @@ class ProfileController extends Controller
 
     protected function getPublisherProjectsData(Account $account)
     {
-        $projects = $account->publisher->projects;
+        $projects = $account->projects()
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return [
             'projects' => $projects

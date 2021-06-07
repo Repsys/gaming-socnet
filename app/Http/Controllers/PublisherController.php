@@ -9,7 +9,11 @@ class PublisherController extends Controller
 {
     public function index()
     {
-        $publishers = Publisher::all();
+        $publishers = Publisher::query()
+            ->join('accounts', 'publishers.account_id', '=', 'accounts.id')
+            ->orderBy('accounts.created_at', 'desc')
+            ->select('publishers.*')
+            ->get();
         return view('publishers', ['publishers' => $publishers]);
     }
 }

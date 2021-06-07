@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -19,8 +20,13 @@ use Illuminate\Notifications\Notifiable;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $avatar
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BlogPost[] $blogPosts
+ * @property-read int|null $blog_posts_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
+ * @property-read \App\Models\User|null $profile
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Project[] $projects
+ * @property-read int|null $projects_count
  * @property-read \App\Models\Publisher|null $publisher
  * @property-read \App\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|Account newModelQuery()
@@ -49,17 +55,17 @@ class Account extends Authenticatable
         'password',
     ];
 
-    public function user()
+    public function user(): HasOne
     {
         return $this->hasOne(User::class);
     }
 
-    public function publisher()
+    public function publisher(): HasOne
     {
         return $this->hasOne(Publisher::class);
     }
 
-    public function profile()
+    public function profile(): HasOne
     {
         if ($this->is_publisher)
             return $this->publisher();
@@ -67,9 +73,14 @@ class Account extends Authenticatable
         return $this->user();
     }
 
-    public function blogPosts()
+    public function blogPosts(): HasMany
     {
         return $this->hasMany(BlogPost::class);
+    }
+
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class);
     }
 
     /**

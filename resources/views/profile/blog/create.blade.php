@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col col-md-8 mx-auto">
+            <div class="col col-lg-8 mx-auto">
                 <h1 class="mb-3 text-center">@yield('title')</h1>
                 <hr>
                 <form method="POST" action="{{route('blog-create_post')}}">
@@ -13,11 +13,13 @@
                     @include('components.alerts')
                     @include('components.form.input-field', [
                         'label' => 'Заголовок',
-                        'name' => 'title'
+                        'name' => 'title',
+                        'required' => true
                     ])
                     @include('components.form.textarea-field', [
                         'label' => 'Текст',
                         'name' => 'text',
+                        'required' => true,
                         'rows' => 10
                     ])
                     <div class="mt-4">

@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col col-md-8 mx-auto">
+            <div class="col col-lg-8 mx-auto">
                 <h1 class="mb-3 text-center">@yield('title')</h1>
                 <hr>
                 <form method="POST" action="{{route('login_post')}}">

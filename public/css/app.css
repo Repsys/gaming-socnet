@@ -80,6 +80,12 @@ hr {
     object-fit: cover;
 }
 
+.projects-image {
+    max-height: 400px;
+    height: 100%;
+    object-fit: cover;
+}
+
 .avatar {
     max-height: 100px;
     max-width: 100px;

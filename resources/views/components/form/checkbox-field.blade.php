@@ -12,8 +12,7 @@
            id="{{$inputId}}"
            value="{{ old($name) }}">
     <label class="form-check-label" for="{{$inputId}}">{{$label}}</label>
-
-    @if($isHelp)
-        <small id="{{$helpId}}" class="form-text text-muted-light">{{$help}}</small>
-    @endif
 </div>
+@if($isHelp)
+    <small id="{{$helpId}}" class="form-text text-muted-light">{{$help}}</small>
+@endif

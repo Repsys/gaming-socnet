@@ -62,7 +62,7 @@ Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
 Route::get('/profile/{login}/blog/{id}', [BlogController::class, 'get'])->name('blog-post');
 
 // Проекты
-Route::get('/projects/{name}', [ProjectController::class, 'get'])->name('projects-get');
+Route::get('/projects/{domain}', [ProjectController::class, 'get'])->name('projects-get');
 
 // Форум
 Route::get('/projects/{id}/forum', [ForumController::class, 'index'])->name('forum');

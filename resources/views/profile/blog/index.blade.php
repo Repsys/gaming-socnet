@@ -1,7 +1,7 @@
 <div class="row">
     @forelse($posts as $post)
-        <div class="col-12 col-xl-6">
-            <div class="card bg-dark shadow blogpost-card mb-4 bg-transparent">
+        <div class="col-12 col-xl-6 mb-4">
+            <div class="card bg-transparent shadow blogpost-card h-100">
                 <img class="card-img-top blog-image" src="https://i.redd.it/jwanbica21w41.jpg"
                      alt="Image">
                 <div class="card-body">
