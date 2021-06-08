@@ -1,5 +1,7 @@
-@extends('profile.publisher.index')
 
-@section('profile-content')
-    <h2>ФОРУМ !!!</h2>
-@endsection
+<h3>Форум</h3>
+<div class="row">
+{{--    @forelse()--}}
+    <div class="col-12">
+    </div>
+</div>

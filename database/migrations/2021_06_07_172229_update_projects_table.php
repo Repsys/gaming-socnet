@@ -15,7 +15,8 @@ class UpdateProjectsTable extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             $table->string('domain', 100)->unique();
-            $table->string('preview', 100)->nullable();
+            $table->string('preview_image', 100)->nullable();
+            $table->text('overview')->nullable();
         });
     }
 
@@ -27,7 +28,8 @@ class UpdateProjectsTable extends Migration
     public function down()
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->dropColumn('preview');
+            $table->dropColumn('overview');
+            $table->dropColumn('preview_image');
             $table->dropColumn('domain');
         });
     }

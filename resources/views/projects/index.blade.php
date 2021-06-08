@@ -16,7 +16,7 @@
                                     'max' => 400,
                                 ])
                             </p>
-                            <a href="{{route('projects-get', ['domain' => $project->domain])}}"
+                            <a href="{{route('project', ['domain' => $project->domain])}}"
                                class="btn btn-outline-info mt-auto">Перейти</a>
                         </div>
                     </div>

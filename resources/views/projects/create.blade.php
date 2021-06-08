@@ -25,6 +25,7 @@
                     @include('components.form.textarea-field', [
                         'label' => 'О проекте',
                         'name' => 'about',
+                        'required' => true,
                         'rows' => 5
                     ])
                     @include('components.form.checkbox-field', [
@@ -33,7 +34,7 @@
                        'help' => 'Если проект закрытый, то только определенный круг лиц сможет просматривать проект'
                    ])
                     <div class="mt-4">
-                        <a href="{{route('profile', ['login' => $account->login, 'content' => 'projects'])}}"
+                        <a href="{{route('profile', ['login' => Auth::user()->login, 'content' => 'projects'])}}"
                            class="btn btn-secondary px-5 mr-2">Назад</a>
                         <button type="submit" class="btn btn-success px-5">Создать</button>
                     </div>

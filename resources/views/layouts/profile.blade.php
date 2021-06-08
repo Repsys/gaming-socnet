@@ -10,7 +10,7 @@
                     src="https://image.flaticon.com/icons/png/512/168/168724.png"
                     class="avatar avatar-profile">
             </div>
-            <div class="col-auto pl-0 align-self-end">
+            <div class="col-6 pl-0 align-self-end">
                 <h3 class="card-title ml-3 mb-2">{{$fullName}}</h3>
             </div>
             <div class="col-auto align-self-end ml-auto mb-2">

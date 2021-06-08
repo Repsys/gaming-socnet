@@ -19,7 +19,7 @@ class ProjectController extends Controller
         return view('projects', ['projects' => $projects]);
     }
 
-    public function get(Request $request, $domain)
+    public function get(Request $request, $domain, $content = null)
     {
         $validator = Validator::make(['domain' => $domain],
             ['domain' => 'string']);
@@ -29,20 +29,30 @@ class ProjectController extends Controller
 
         $project = Project::whereDomain($domain)->firstOrFail();
 
+        $content = $content ?? 'overview';
+        switch ($content) {
+            case 'overview':
+                break;
+            case 'forum':
+                break;
+            default:
+                abort(404);
+        }
+
         return view('projects.get')
-            ->with('project', $project);
+            ->with('project', $project)
+            ->with('content', $content);
     }
 
     public function create(Request $request)
     {
         $account = Auth::user();
-        $accData = $account->getAccountData();
 
         if (!$account->is_publisher) {
             abort(404); // TODO сделать через политики...
         }
 
-        return view('projects.create')->with($accData);
+        return view('projects.create');
     }
 
     public function create_post(Request $request)
@@ -56,7 +66,7 @@ class ProjectController extends Controller
         Validator::validate($request->all(), [
             'name' => 'required|max:100',
             'domain' => 'required|min:4|max:100|unique:projects',
-            'about' => 'max:5000',
+            'about' => 'required|max:5000',
         ], [], [
             'name' => 'Название',
             'domain' => 'Домен',
