@@ -49,6 +49,10 @@ Route::middleware('auth')->group(function () {
     // Проекты
     Route::get('/profile/projects/new', [ProjectController::class, 'create'])->name('projects-create');
     Route::post('/profile/projects/new', [ProjectController::class, 'create_post'])->name('projects-create_post');
+
+    // Форум
+    Route::get('/projects/{domain}/forum/new', [ForumController::class, 'topic_create'])->name('forum-topic-create');
+    Route::post('/projects/{domain}/forum/new', [ForumController::class, 'topic_create_post'])->name('forum-topic-create_post');
 });
 
 // Профиль
@@ -65,6 +69,5 @@ Route::get('/profile/{login}/blog/{id}', [BlogController::class, 'get'])->name('
 Route::get('/projects/{domain}/{content?}', [ProjectController::class, 'get'])->name('project');
 
 // Форум
-Route::get('/projects/{id}/forum', [ForumController::class, 'index'])->name('forum');
-
+Route::get('/projects/{domain}/forum/{id}', [ForumController::class, 'topic_get'])->name('forum-topic');
 

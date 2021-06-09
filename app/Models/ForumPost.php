@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\ForumPost
@@ -41,4 +43,19 @@ class ForumPost extends Model
         'title',
         'text',
     ];
+
+    public function forumTopic(): BelongsTo
+    {
+        return $this->belongsTo(ForumTopic::class);
+    }
+
+    public function replyTo(): BelongsTo
+    {
+        return $this->belongsTo(ForumPost::class, 'id', 'reply_to');
+    }
+
+    public function replies(): HasMany
+    {
+        return $this->HasMany(ForumPost::class, 'reply_to', 'id');
+    }
 }

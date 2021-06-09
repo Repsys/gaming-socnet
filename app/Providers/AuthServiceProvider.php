@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Account;
+use App\Models\Project;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -26,9 +28,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        /// Мой пример гейта
-//        Gate::define('can-login', function () {
-//            return !(bool)Auth::user();
-//        });
+        Gate::define('create-forum-topic', function (Account $account, Project $project) {
+            return $project->account->id == $account->id;
+        });
     }
 }

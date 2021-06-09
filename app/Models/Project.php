@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * App\Models\Project
@@ -43,4 +46,25 @@ class Project extends Model
         'domain',
         'is_closed',
     ];
+
+    public static function getByDomainOrFail($domain)
+    {
+        $validator = Validator::make(['domain' => $domain],
+            ['domain' => 'string']);
+        if ($validator->fails()) {
+            abort(404);
+        }
+
+        return Project::whereDomain($domain)->firstOrFail();
+    }
+
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(Account::class);
+    }
+
+    public function forumTopics(): HasMany
+    {
+        return $this->hasMany(ForumTopic::class);
+    }
 }

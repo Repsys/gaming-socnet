@@ -1,6 +1,6 @@
 @extends('layouts.template')
 
-@section('title', 'Создание нового проекта')
+@section('title', 'Форум - Создание новой темы')
 
 @section('content')
     <div class="container">
@@ -8,7 +8,7 @@
             <div class="col-12 col-lg-8 mx-auto">
                 <h1 class="mb-3 text-center">@yield('title')</h1>
                 <hr>
-                <form method="POST" action="{{route('projects-create_post')}}">
+                <form method="POST" action="{{route('forum-topic-create_post', ['domain' => $project->domain])}}">
                     @csrf
                     @include('components.alerts')
                     @include('components.form.input-field', [
@@ -16,26 +16,15 @@
                         'name' => 'name',
                         'required' => true
                     ])
-                    @include('components.form.input-field', [
-                        'label' => 'Домен',
-                        'name' => 'domain',
-                        'required' => true,
-                        'help' => 'Будет отображаться в URL'
-                    ])
                     @include('components.form.textarea-field', [
-                        'label' => 'О проекте',
+                        'label' => 'Описание',
                         'name' => 'about',
                         'required' => true,
                         'rows' => 5,
-                        'max' => 5000
+                        'max' => 500
                     ])
-                    @include('components.form.checkbox-field', [
-                       'label' => 'Закрытый проект ?',
-                       'name' => 'is_closed',
-                       'help' => 'Если проект закрытый, то только определенный круг лиц сможет просматривать проект'
-                   ])
                     <div class="mt-4">
-                        <a href="{{route('profile', ['login' => Auth::user()->login, 'content' => 'projects'])}}"
+                        <a href="{{route('project', ['domain' => $project->domain, 'content' => 'forum'])}}"
                            class="btn btn-secondary px-5 mr-2">Назад</a>
                         <button type="submit" class="btn btn-success px-5">Создать</button>
                     </div>

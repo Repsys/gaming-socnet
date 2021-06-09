@@ -36,11 +36,6 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="{{route('profile')}}">Профиль</a>
-                            @if(Auth::user()->is_publisher)
-                                <a class="dropdown-item" href="#">Проекты</a>
-                            @else
-                                <a class="dropdown-item" href="#">Подписки</a>
-                            @endif
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item text-danger" href="{{route('logout')}}">Выход</a>
                         </div>

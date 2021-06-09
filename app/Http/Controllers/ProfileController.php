@@ -13,19 +13,19 @@ class ProfileController extends Controller
 {
     public function index(Request $request, $login = null, $content = null)
     {
-        $account = Auth::user();
+        $authAccount = Auth::user();
 
         if (is_null($login)) {
-            if (!$account) {
+            if (!$authAccount) {
                 abort(404);
             }
-            return redirect()->route('profile', ['login' => $account->login]);
+            return redirect()->route('profile', ['login' => $authAccount->login]);
         }
 
-        $isOwner = $account && $account->login == $login;
-        if ($account && $isOwner) {
-            $accData = $account->getAccountData();
-            $redirect = $this->redirectIfNoProfile($account);
+        $isOwner = $authAccount && $authAccount->login == $login;
+        if ($authAccount && $isOwner) {
+            $accData = $authAccount->getAccountData();
+            $redirect = $this->redirectIfNoProfile($authAccount);
             if ($redirect) return $redirect;
         } else {
             $accData = Account::getAccountDataByLogin($login);
@@ -75,16 +75,16 @@ class ProfileController extends Controller
 
     public function edit(Request $request)
     {
-        $account = Auth::user();
-        $accData = $account->getAccountData();
+        $authAccount = Auth::user();
+        $accData = $authAccount->getAccountData();
 
-        if ($account->is_publisher) {
+        if ($authAccount->is_publisher) {
             $view = view('profile.publisher.edit');
         } else {
             $view = view('profile.user.edit');
         }
 
-        if (!$account->profile()->exists()) {
+        if (!$authAccount->profile()->exists()) {
             $view->with('info', 'Сперва заполните, пожалуйста, ваш профиль:');
         }
 
@@ -93,10 +93,10 @@ class ProfileController extends Controller
 
     public function edit_post(Request $request)
     {
-        $account = Auth::user();
-        $hasProfile = $account->profile()->exists();
+        $authAccount = Auth::user();
+        $hasProfile = $authAccount->profile()->exists();
 
-        if ($account->is_publisher) {
+        if ($authAccount->is_publisher) {
             Validator::validate($request->all(), [
                 'name' => 'required|min:4|max:100',
                 'about' => 'nullable|max:2000',
@@ -107,9 +107,9 @@ class ProfileController extends Controller
 
             if (!$hasProfile){
                 $publisher = new Publisher($request->all());
-                $publisher->account()->associate($account);
+                $publisher->account()->associate($authAccount);
             } else {
-                $publisher = $account->publisher;
+                $publisher = $authAccount->publisher;
                 $publisher->update($request->all());
             }
             $publisher->save();
@@ -126,14 +126,14 @@ class ProfileController extends Controller
 
             if (!$hasProfile){
                 $user = new User($request->all());
-                $user->account()->associate($account);
+                $user->account()->associate($authAccount);
             } else {
-                $user = $account->user;
+                $user = $authAccount->user;
                 $user->update($request->all());
             }
             $user->save();
         }
-        return redirect()->route('profile', ['login' => $account->login])
+        return redirect()->route('profile', ['login' => $authAccount->login])
             ->with('success', 'Профиль успешно сохранён!');
     }
 

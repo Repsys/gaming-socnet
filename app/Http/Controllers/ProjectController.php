@@ -21,34 +21,42 @@ class ProjectController extends Controller
 
     public function get(Request $request, $domain, $content = null)
     {
-        $validator = Validator::make(['domain' => $domain],
-            ['domain' => 'string']);
-        if ($validator->fails()) {
-            abort(404);
-        }
-
-        $project = Project::whereDomain($domain)->firstOrFail();
+        $project = Project::getByDomainOrFail($domain);
 
         $content = $content ?? 'overview';
+        $data = [];
         switch ($content) {
             case 'overview':
                 break;
             case 'forum':
+                $data = $this->getProjectForumData($project);
                 break;
             default:
                 abort(404);
         }
 
         return view('projects.get')
+            ->with($data)
             ->with('project', $project)
             ->with('content', $content);
     }
 
+    protected function getProjectForumData(Project $project)
+    {
+        $topics = $project->forumTopics()
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return [
+            'topics' => $topics
+        ];
+    }
+
     public function create(Request $request)
     {
-        $account = Auth::user();
+        $authAccount = Auth::user();
 
-        if (!$account->is_publisher) {
+        if (!$authAccount->is_publisher) {
             abort(404); // TODO сделать через политики...
         }
 
@@ -57,9 +65,9 @@ class ProjectController extends Controller
 
     public function create_post(Request $request)
     {
-        $account = Auth::user();
+        $authAccount = Auth::user();
 
-        if (!$account->is_publisher) {
+        if (!$authAccount->is_publisher) {
             abort(404); // TODO сделать через политики...
         }
 
@@ -75,11 +83,11 @@ class ProjectController extends Controller
 
         $project = new Project($request->all());
         $project->is_closed = $request->has('is_closed');
-        $account->projects()->save($project);
+        $authAccount->projects()->save($project);
 
         return redirect()->route('profile', [
+            'login' => $authAccount->login,
             'content' => 'projects',
-            'login' => $account->login
         ])->with('success', 'Проект успешно создан!');
     }
 }
