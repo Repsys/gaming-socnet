@@ -18,6 +18,9 @@ class CreateProjectsTable extends Migration
             $table->string('name', 100);
             $table->text('about');
             $table->boolean('is_closed')->default(false);
+            $table->string('domain', 100)->unique();
+            $table->string('preview_image', 200)->nullable();
+            $table->text('overview')->nullable();
             $table->timestamps();
 
             $table->unsignedBigInteger('account_id');

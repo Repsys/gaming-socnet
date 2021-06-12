@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostsTable extends Migration
+class CreateForumAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,21 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('forum_answers', function (Blueprint $table) {
             $table->id();
             $table->string('title', 100);
             $table->text('text');
             $table->string('image', 200)->nullable();
             $table->timestamps();
 
-            $table->unsignedBigInteger('project_id');
-            $table->foreign('project_id')
-                ->references('id')->on('projects')
+            $table->unsignedBigInteger('forum_topic_id');
+            $table->foreign('forum_topic_id')
+                ->references('id')->on('forum_topics')
                 ->onDelete('cascade');
+            $table->unsignedBigInteger('account_id')->nullable();
+            $table->foreign('account_id')
+                ->references('id')->on('accounts')
+                ->onDelete('set null');
         });
     }
 
@@ -34,6 +38,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('forum_answers');
     }
 }

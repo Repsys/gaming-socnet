@@ -15,16 +15,20 @@ class CreateForumTopicsTable extends Migration
     {
         Schema::create('forum_topics', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
-            $table->string('about', 500);
+            $table->string('title', 100);
+            $table->text('text');
+            $table->string('image', 200)->nullable();
             $table->timestamps();
 
-            $table->unsignedBigInteger('project_id');
-            $table->foreign('project_id')
-                ->references('id')->on('projects')
+            $table->unsignedBigInteger('forum_section_id');
+            $table->foreign('forum_section_id')
+                ->references('id')->on('forum_sections')
                 ->onDelete('cascade');
+            $table->unsignedBigInteger('account_id')->nullable();
+            $table->foreign('account_id')
+                ->references('id')->on('accounts')
+                ->onDelete('set null');
         });
-
     }
 
     /**

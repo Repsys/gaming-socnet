@@ -16,10 +16,10 @@ use Illuminate\Notifications\Notifiable;
  * @property string $email
  * @property string $login
  * @property string $password
+ * @property string|null $avatar
  * @property bool $is_publisher
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $avatar
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BlogPost[] $blogPosts
  * @property-read int|null $blog_posts_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
@@ -89,13 +89,15 @@ class Account extends Authenticatable
      */
     public function getFullName() : string
     {
-        if ($this->is_publisher) {
-            $fullName = $this->profile->name;
-        } else {
-            if (isset($this->profile->name)) {
+        if ($this->profile()->exists()) {
+            if ($this->is_publisher) {
                 $fullName = $this->profile->name;
-                if (isset($this->profile->surname)) {
-                    $fullName .= ' ' . $this->profile->surname;
+            } else {
+                if (isset($this->profile->name)) {
+                    $fullName = $this->profile->name;
+                    if (isset($this->profile->surname)) {
+                        $fullName .= ' ' . $this->profile->surname;
+                    }
                 }
             }
         }

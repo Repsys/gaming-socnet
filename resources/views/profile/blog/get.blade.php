@@ -15,7 +15,7 @@
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <p class="card-text m-0"><small class="text-muted-light">{{$post->created_at}}</small></p>
-                        <p class="card-text m-0"><small class="text-muted-light">Автор - {{$fullName}}</small></p>
+                        <p class="card-text m-0 text-right"><small class="text-muted-light">Автор - {{$fullName}}</small></p>
                     </div>
                 </div>
             </div>

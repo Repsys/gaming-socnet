@@ -17,6 +17,7 @@ class CreateBlogPostsTable extends Migration
             $table->id();
             $table->string('title', 100);
             $table->text('text');
+            $table->string('image', 200)->nullable();
             $table->timestamps();
 
             $table->unsignedBigInteger('account_id');

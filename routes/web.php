@@ -50,9 +50,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/projects/new', [ProjectController::class, 'create'])->name('projects-create');
     Route::post('/profile/projects/new', [ProjectController::class, 'create_post'])->name('projects-create_post');
 
-    // Форум
-    Route::get('/projects/{domain}/forum/new', [ForumController::class, 'topic_create'])->name('forum-topic-create');
-    Route::post('/projects/{domain}/forum/new', [ForumController::class, 'topic_create_post'])->name('forum-topic-create_post');
+    /// Форум
+    // Разделы
+    Route::get('/projects/{domain}/forum/new', [ForumController::class, 'section_create'])->name('forum-section-create');
+    Route::post('/projects/{domain}/forum/new', [ForumController::class, 'section_create_post'])->name('forum-section-create_post');
+    // Темы
+    Route::get('/projects/{domain}/forum/{sec_id}/new', [ForumController::class, 'topic_create'])->name('forum-topic-create');
+    Route::post('/projects/{domain}/forum/{sec_id}/new', [ForumController::class, 'topic_create_post'])->name('forum-topic-create_post');
 });
 
 // Профиль
@@ -69,5 +73,6 @@ Route::get('/profile/{login}/blog/{id}', [BlogController::class, 'get'])->name('
 Route::get('/projects/{domain}/{content?}', [ProjectController::class, 'get'])->name('project');
 
 // Форум
-Route::get('/projects/{domain}/forum/{id}', [ForumController::class, 'topic_get'])->name('forum-topic');
+Route::get('/projects/{domain}/forum/{id}', [ForumController::class, 'section_get'])->name('forum-section');
+Route::get('/projects/{domain}/forum/{sec_id}/{id}/', [ForumController::class, 'topic_get'])->name('forum-topic');
 

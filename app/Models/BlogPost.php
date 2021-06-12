@@ -13,15 +13,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $id
  * @property string $title
  * @property string $text
+ * @property string|null $image
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $account_id
+ * @property-read \App\Models\Account $account
  * @method static \Illuminate\Database\Eloquent\Builder|BlogPost newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BlogPost newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BlogPost query()
  * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereAccountId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BlogPost whereUpdatedAt($value)

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Account;
+use App\Models\ForumSection;
 use App\Models\Project;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
@@ -28,8 +29,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('create-forum-topic', function (Account $account, Project $project) {
+        Gate::define('create-forum-section', function (Account $account, Project $project) {
             return $project->account->id == $account->id;
+        });
+
+        Gate::define('create-forum-topic', function (Account $account, ForumSection $section) {
+            return $section->project->account->id == $account->id;
         });
     }
 }

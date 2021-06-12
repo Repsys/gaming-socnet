@@ -15,12 +15,15 @@ use Illuminate\Support\Facades\Validator;
  * @property string $name
  * @property string $about
  * @property bool $is_closed
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property int $account_id
  * @property string $domain
  * @property string|null $preview_image
  * @property string|null $overview
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $account_id
+ * @property-read \App\Models\Account $account
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ForumSection[] $forumSections
+ * @property-read int|null $forum_sections_count
  * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Project query()
@@ -63,8 +66,8 @@ class Project extends Model
         return $this->belongsTo(Account::class);
     }
 
-    public function forumTopics(): HasMany
+    public function forumSections(): HasMany
     {
-        return $this->hasMany(ForumTopic::class);
+        return $this->hasMany(ForumSection::class);
     }
 }

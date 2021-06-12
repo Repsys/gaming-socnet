@@ -2,7 +2,7 @@
 
 @section('profile-buttons')
     @if($content == 'projects' && $isOwner)
-        <a class="btn btn-info mb-2 mb-lg-0 ml-lg-2" href="{{route('projects-create')}}">Создать проект</a>
+        <a class="btn btn-success mb-2 mb-lg-0 ml-lg-2" href="{{route('projects-create')}}">Создать проект</a>
     @endif
 @endsection
 

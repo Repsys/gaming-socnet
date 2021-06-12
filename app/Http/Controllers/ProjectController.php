@@ -43,12 +43,12 @@ class ProjectController extends Controller
 
     protected function getProjectForumData(Project $project)
     {
-        $topics = $project->forumTopics()
+        $sections = $project->forumSections()
             ->orderBy('created_at', 'desc')
             ->get();
 
         return [
-            'topics' => $topics
+            'sections' => $sections
         ];
     }
 
