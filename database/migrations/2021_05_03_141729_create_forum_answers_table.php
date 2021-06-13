@@ -15,7 +15,6 @@ class CreateForumAnswersTable extends Migration
     {
         Schema::create('forum_answers', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 100);
             $table->text('text');
             $table->string('image', 200)->nullable();
             $table->timestamps();

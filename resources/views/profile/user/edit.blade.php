@@ -8,9 +8,10 @@
             <div class="col col-lg-8 mx-auto">
                 <h1 class="mb-3 text-center">Профиль пользователя {{$account->login}}</h1>
                 <hr>
-                <form method="POST" action="{{route('profile-edit_post')}}">
+                <form method="POST" action="{{route('profile-edit_post')}}" enctype="multipart/form-data">
                     @csrf
                     @include('components.alerts')
+                    @include('profile.edit')
                     @include('components.form.input-field', [
                         'label' => 'Имя',
                         'name' => 'name',

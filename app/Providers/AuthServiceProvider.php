@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Account;
 use App\Models\ForumSection;
+use App\Models\ForumTopic;
 use App\Models\Project;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,12 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('create-forum-topic', function (Account $account, ForumSection $section) {
-            return $section->project->account->id == $account->id;
+//            return $section->project->account->id == $account->id;
+            return true;
+        });
+
+        Gate::define('create-forum-answer', function (Account $account, ForumTopic $topic) {
+            return true;
         });
     }
 }

@@ -2,20 +2,25 @@
 
 @section('title', 'Пост "'.$post->title.'"')
 
+@include('components.back-btn',[
+    'url' => route('profile', ['login' => $account->login, 'content' => 'blog'])
+])
+
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="card bg-dark shadow blogpost-card mb-4 bg-transparent">
-                    <img class="card-img-top blog-image" src="https://i.redd.it/jwanbica21w41.jpg"
-                         alt="Image">
+                    <img class="card-img-top blog-image"
+                         src="{{Storage::url('blog/previews/'.$post->image)}}"
+                         alt="{{$post->image}}">
                     <div class="card-body">
                         <h4 class="card-title">{{$post->title}}</h4>
-                        <p class="card-text">{{$post->text}}</p>
+                        <pre class="card-text">{{$post->text}}</pre>
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
-                        <p class="card-text m-0"><small class="text-muted-light">{{$post->created_at}}</small></p>
-                        <p class="card-text m-0 text-right"><small class="text-muted-light">Автор - {{$fullName}}</small></p>
+                        <small class="text-muted-light">{{$post->created_at}}</small>
+                        @include('components.avatar-small', ['account' => $post->account])
                     </div>
                 </div>
             </div>

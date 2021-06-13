@@ -8,7 +8,7 @@
             <div class="col col-lg-8 mx-auto">
                 <h1 class="mb-3 text-center">@yield('title')</h1>
                 <hr>
-                <form method="POST" action="{{route('blog-create_post')}}">
+                <form method="POST" action="{{route('blog-create_post')}}" enctype="multipart/form-data">
                     @csrf
                     @include('components.alerts')
                     @include('components.form.input-field', [
@@ -21,6 +21,11 @@
                         'name' => 'text',
                         'required' => true,
                         'rows' => 10
+                    ])
+                    @include('components.form.input-file-field', [
+                        'label' => 'Превью',
+                        'name' => 'image',
+                        'accept' => 'image/*',
                     ])
                     <div class="mt-4">
                         <a href="{{route('profile', ['login' => $account->login, 'content' => 'blog'])}}"

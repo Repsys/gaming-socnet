@@ -11,8 +11,8 @@
 </head>
 <body id="body" class="text-light">
 @include('components.header')
-<a class="back-btn btn btn-dark position-absolute ml-3 mt-3">< Назад <</a>
-<section id="contentSection" class="py-5">
+@yield('back-btn')
+<section id="contentSection" class="">
     @yield('content')
 </section>
 @include('components.footer')

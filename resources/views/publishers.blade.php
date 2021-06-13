@@ -18,7 +18,7 @@
                             <div class="card bg-transparent shadow publisher-card h-100">
                                 <div class="card-header p-0 d-flex align-items-end">
                                     <img
-                                        src="https://image.flaticon.com/icons/png/512/168/168724.png"
+                                        src="{{Storage::url('avatars/'.$publisher->account->avatar)}}"
                                         class="avatar">
                                     <div class="ml-3">
                                         <a href="{{route('profile', ['login' => $publisher->account->login])}}" class="card-link">

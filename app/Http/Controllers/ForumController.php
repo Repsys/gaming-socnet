@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\ForumAnswer;
 use App\Models\ForumSection;
 use App\Models\ForumTopic;
 use App\Models\Project;
@@ -74,7 +75,7 @@ class ForumController extends Controller
         $project = Project::getByDomainOrFail($domain);
 
         $validator = Validator::make(['sec_id' => $sec_id, 'id' => $id],
-            ['sec_id' => $sec_id, 'id' => 'integer']);
+            ['sec_id' => 'integer', 'id' => 'integer']);
         if ($validator->fails()) {
             abort(404);
         }
@@ -82,7 +83,7 @@ class ForumController extends Controller
         $section = $project->forumSections()->findOrFail($sec_id);
         $topic = $section->topics()->findOrFail($id);
 
-        return view('forum.section.get')
+        return view('forum.topic.get')
             ->with(['project' => $project])
             ->with(['section' => $section])
             ->with(['topic' => $topic]);
@@ -127,5 +128,37 @@ class ForumController extends Controller
             'domain' => $project->domain,
             'id' => $section->id
         ])->with('success', 'Тема успешно создана!');
+    }
+
+    public function answer_create_post(Request $request, $domain, $sec_id, $id)
+    {
+        $project = Project::getByDomainOrFail($domain);
+
+        $validator = Validator::make(['sec_id' => $sec_id, 'id' => $id],
+            ['sec_id' => 'integer', 'id' => 'integer']);
+        if ($validator->fails()) {
+            abort(404);
+        }
+
+        $section = $project->forumSections()->findOrFail($sec_id);
+        $topic = $section->topics()->findOrFail($id);
+
+        if (Gate::denies('create-forum-answer', $topic)) {
+            abort(403);
+        }
+
+        Validator::validate($request->all(), [
+            'text' => 'required|max:2000',
+        ]);
+
+        $answer = new ForumAnswer($request->all());
+        $answer->account()->associate(Auth::user());
+        $topic->answers()->save($answer);
+
+        return redirect()->route('forum-topic', [
+            'domain' => $project->domain,
+            'sec_id' => $section->id,
+            'id' => $topic->id
+        ]);
     }
 }

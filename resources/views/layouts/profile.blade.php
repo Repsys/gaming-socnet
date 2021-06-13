@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-auto pr-0 align-self-end">
                 <img
-                    src="https://image.flaticon.com/icons/png/512/168/168724.png"
+                    src="{{Storage::url('avatars/'.$account->avatar)}}"
                     class="avatar avatar-profile">
             </div>
             <div class="col-6 pl-0 align-self-end">

@@ -12,15 +12,17 @@
     <div class="col-12">
         <div class="list-group shadow">
             @foreach($sections as $section)
-                <a href="{{route('forum-section', ['domain' => $project->domain, 'id' => $section->id])}}"
-                   class="list-group-item text-light list-group-item-action  bg-transparent flex-column align-items-start">
-                    <h5>{{$section->title}}</h5>
-                    <p>{{$section->about}}</p>
+                <div class="list-group-item text-light bg-transparent flex-column align-items-start">
+                    <a href="{{route('forum-section', ['domain' => $project->domain, 'id' => $section->id])}}"
+                       class="list-group-item-action text-light">
+                        <h5>{{$section->title}}</h5>
+                        <p>{{$section->about}}</p>
+                    </a>
                     <div class="d-flex justify-content-between align-items-center">
                         <small class="text-muted-light">{{$section->created_at}}</small>
-                        <small class="text-muted-light text-right">Автор - {{$section->created_at}}</small>
+                        @include('components.avatar-small', ['account' => $section->account])
                     </div>
-                </a>
+                </div>
             @endforeach
         </div>
         @if($sections->isEmpty())

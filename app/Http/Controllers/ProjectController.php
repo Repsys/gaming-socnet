@@ -75,14 +75,26 @@ class ProjectController extends Controller
             'name' => 'required|max:100',
             'domain' => 'required|min:4|max:100|unique:projects',
             'about' => 'required|max:5000',
+            'preview_image' => 'image|mimes:png,jpg,jpeg|max:2048',
         ], [], [
             'name' => 'Название',
             'domain' => 'Домен',
             'about' => 'О проекте',
+            'preview_image' => 'Превью',
         ]);
 
         $project = new Project($request->all());
         $project->is_closed = $request->has('is_closed');
+
+        if ($request->hasFile('preview_image')) {
+            $extension = $request->file('preview_image')->getClientOriginalExtension();
+            $fileName = 'preview_'.$project->id.'.'.$extension;
+            $request->file('preview_image')->storeAs('public/project/previews', $fileName);
+        } else {
+            $fileName = 'no_preview.png';
+        }
+        $project->preview_image = $fileName;
+
         $authAccount->projects()->save($project);
 
         return redirect()->route('profile', [

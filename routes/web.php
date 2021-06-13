@@ -57,6 +57,8 @@ Route::middleware('auth')->group(function () {
     // Темы
     Route::get('/projects/{domain}/forum/{sec_id}/new', [ForumController::class, 'topic_create'])->name('forum-topic-create');
     Route::post('/projects/{domain}/forum/{sec_id}/new', [ForumController::class, 'topic_create_post'])->name('forum-topic-create_post');
+    // Ответы
+    Route::post('/projects/{domain}/forum/{sec_id}/{id}/new', [ForumController::class, 'answer_create_post'])->name('forum-answer-create_post');
 });
 
 // Профиль

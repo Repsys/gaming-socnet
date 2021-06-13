@@ -98,9 +98,11 @@ class ProfileController extends Controller
 
         if ($authAccount->is_publisher) {
             Validator::validate($request->all(), [
+                'avatar' => 'image|mimes:png,jpg,jpeg|max:2048',
                 'name' => 'required|min:4|max:100',
                 'about' => 'nullable|max:2000',
             ], [], [
+                'avatar' => 'Аватар',
                 'name' => 'Название издательства',
                 'about' => 'Об издательстве',
             ]);
@@ -115,10 +117,12 @@ class ProfileController extends Controller
             $publisher->save();
         } else {
             Validator::validate($request->all(), [
+                'avatar' => 'image|mimes:png,jpg,jpeg|max:2048',
                 'name' => 'nullable|min:2|max:100',
                 'surname' => 'nullable|min:2|max:100',
                 'about' => 'nullable|max:2000',
             ], [], [
+                'avatar' => 'Аватар',
                 'name' => 'Имя',
                 'surname' => 'Фамилия',
                 'about' => 'Обо мне',
@@ -133,6 +137,17 @@ class ProfileController extends Controller
             }
             $user->save();
         }
+
+        if ($request->hasFile('avatar')) {
+            $extension = $request->file('avatar')->getClientOriginalExtension();
+            $fileName = 'avatar_'.$authAccount->id.'.'.$extension;
+            $request->file('avatar')->storeAs('public/avatars', $fileName);
+        } else {
+            $fileName = 'no_avatar.png';
+        }
+        $authAccount->avatar = $fileName;
+        $authAccount->save();
+
         return redirect()->route('profile', ['login' => $authAccount->login])
             ->with('success', 'Профиль успешно сохранён!');
     }

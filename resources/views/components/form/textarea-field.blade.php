@@ -1,13 +1,14 @@
 <div class="form-group">
     @php
         $inputId = \Illuminate\Support\Str::camel($name).'Input';
-        $required = isset($required) ? ($required ? 'required' : '') : false;
+        $requiredClass = isset($required) ? ($required ? 'required' : '') : '';
+        $htmlRequired = $htmlRequired ?? false;
         $value = $value ?? '';
         $rows = $rows ?? 5;
         $isHelp = $help ?? false;
         $helpId = $isHelp ? $name.'Help' : null;
     @endphp
-    <label for="{{$inputId}}" class="{{$required}}">{{$label}}</label>
+    <label for="{{$inputId}}" class="{{$requiredClass}}">{{$label}}</label>
     <textarea name="{{$name}}" rows="{{$rows}}"
               @if(isset($max))
               maxlength="{{$max}}"
@@ -15,6 +16,9 @@
               class="form-control {{$errors->has($name) ? 'is-invalid' : ''}}"
               @if($isHelp)
               aria-describedby="{{$helpId}}"
+              @endif
+              @if($htmlRequired)
+              required
               @endif
               id="{{$inputId}}">{{ old($name) ?: $value }}</textarea>
 

@@ -51,4 +51,9 @@ class ForumTopic extends Model
     {
         return $this->belongsTo(ForumSection::class);
     }
+
+    public function answers(): HasMany
+    {
+        return $this->hasMany(ForumAnswer::class);
+    }
 }

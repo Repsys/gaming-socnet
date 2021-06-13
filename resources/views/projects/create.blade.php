@@ -8,7 +8,7 @@
             <div class="col-12 col-lg-8 mx-auto">
                 <h1 class="mb-3 text-center">@yield('title')</h1>
                 <hr>
-                <form method="POST" action="{{route('projects-create_post')}}">
+                <form method="POST" action="{{route('projects-create_post')}}" enctype="multipart/form-data">
                     @csrf
                     @include('components.alerts')
                     @include('components.form.input-field', [
@@ -28,6 +28,11 @@
                         'required' => true,
                         'rows' => 5,
                         'max' => 5000
+                    ])
+                    @include('components.form.input-file-field', [
+                        'label' => 'Превью',
+                        'name' => 'preview_image',
+                        'accept' => 'image/*',
                     ])
                     @include('components.form.checkbox-field', [
                        'label' => 'Закрытый проект ?',

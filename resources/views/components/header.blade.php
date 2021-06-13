@@ -28,18 +28,24 @@
                     </li>
                 @endguest
                 @auth
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                           data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            {{Auth::user()->login}}
+                    <div class="d-flex align-items-center">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                {{Auth::user()->login}}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="{{route('profile')}}">Профиль</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-danger" href="{{route('logout')}}">Выход</a>
+                            </div>
+                        </li>
+                        <a href="{{route('profile', ['login' => Auth::user()->login])}}">
+                            <img src="{{Storage::url('avatars/'.Auth::user()->avatar)}}"
+                                 class="avatar-small ml-2">
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="{{route('profile')}}">Профиль</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="{{route('logout')}}">Выход</a>
-                        </div>
-                    </li>
+                    </div>
                 @endauth
             </ul>
         </div>

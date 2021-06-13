@@ -2,8 +2,9 @@
     @forelse($posts as $post)
         <div class="col-12 col-xl-6 mb-4">
             <div class="card bg-transparent shadow blogpost-card h-100">
-                <img class="card-img-top blog-image" src="https://i.redd.it/jwanbica21w41.jpg"
-                     alt="Image">
+                <img class="card-img-top blog-image"
+                     src="{{Storage::url('blog/previews/'.$post->image)}}"
+                     alt="{{$post->image}}">
                 <div class="card-body">
                     <h4 class="card-title">{{$post->title}}</h4>
                     <p class="card-text">
