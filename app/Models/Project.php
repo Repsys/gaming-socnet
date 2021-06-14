@@ -47,7 +47,7 @@ class Project extends Model
         'name',
         'about',
         'domain',
-        'is_closed',
+        'overview',
     ];
 
     public static function getByDomainOrFail($domain)

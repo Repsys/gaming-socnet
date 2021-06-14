@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * App\Models\ForumAnswer
  *
  * @property int $id
- * @property string $title
  * @property string $text
  * @property string|null $image
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -28,7 +27,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|ForumAnswer whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ForumAnswer whereImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ForumAnswer whereText($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ForumAnswer whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ForumAnswer whereUpdatedAt($value)
  * @mixin \Eloquent
  */

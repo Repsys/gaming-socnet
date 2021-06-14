@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $post_id
  * @property int $account_id
+ * @property-read \App\Models\Account $account
+ * @property-read \App\Models\BlogPost $project
  * @method static \Illuminate\Database\Eloquent\Builder|BlogComment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BlogComment newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BlogComment query()

@@ -19,9 +19,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int $project_id
  * @property int|null $account_id
  * @property-read \App\Models\Account|null $account
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ForumTopic[] $forumTopics
- * @property-read int|null $forum_topics_count
  * @property-read \App\Models\Project $project
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ForumTopic[] $topics
+ * @property-read int|null $topics_count
  * @method static \Illuminate\Database\Eloquent\Builder|ForumSection newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ForumSection newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ForumSection query()

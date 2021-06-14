@@ -1,5 +1,6 @@
 @php
-    $text = $text ?: 'Не указано';
+    $emptyText = $emptyText ?? 'Не указано';
+    $text = $text ?: $emptyText;
 
     if (isset($max)) {
         $text = mb_strlen($text) >= $max

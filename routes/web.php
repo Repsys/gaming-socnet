@@ -47,9 +47,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/blog/new', [BlogController::class, 'create_post'])->name('blog-create_post');
     Route::post('/profile/{login}/blog/{id}', [BlogController::class, 'comment_create_post'])->name('blog-comment-create_post');
 
-    // Проекты
+    /// Проекты
     Route::get('/profile/projects/new', [ProjectController::class, 'create'])->name('projects-create');
     Route::post('/profile/projects/new', [ProjectController::class, 'create_post'])->name('projects-create_post');
+    // edit
+    Route::get('/projects/{domain}/edit', [ProjectController::class, 'edit'])->name('projects-edit');
+    Route::post('/projects/{domain}/edit', [ProjectController::class, 'edit_post'])->name('projects-edit_post');
 
     /// Форум
     // Разделы

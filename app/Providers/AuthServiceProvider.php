@@ -30,23 +30,44 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        // Проекты
+        Gate::define('create-project', function (Account $account) {
+            return $account->is_publisher;
+        });
+        Gate::define('edit-project', function (Account $account, Project $project) {
+            return $project->account->id == $account->id;
+        });
+
         // Блог
         Gate::define('create-blog-comment', function (Account $account, BlogPost $post) {
             return true;
+        });
+        Gate::define('delete-blog-post', function (Account $account, BlogPost $post) {
+            return $post->account->id == $account->id;
         });
 
         // Форум
         Gate::define('create-forum-section', function (Account $account, Project $project) {
             return $project->account->id == $account->id;
         });
+        Gate::define('delete-forum-section', function (Account $account, Project $project) {
+            return $project->account->id == $account->id;
+        });
 
         Gate::define('create-forum-topic', function (Account $account, ForumSection $section) {
-//            return $section->project->account->id == $account->id;
             return true;
+        });
+        Gate::define('delete-forum-topic', function (Account $account, ForumSection $section) {
+            return $section->account->id == $account->id ||
+                $section->project->account->id == $account->id;
         });
 
         Gate::define('create-forum-answer', function (Account $account, ForumTopic $topic) {
             return true;
+        });
+        Gate::define('delete-forum-answer', function (Account $account, ForumTopic $topic) {
+            return $topic->account->id == $account->id ||
+                $topic->project->account->id == $account->id;
         });
     }
 }

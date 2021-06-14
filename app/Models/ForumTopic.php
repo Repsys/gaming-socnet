@@ -19,7 +19,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $forum_section_id
  * @property int|null $account_id
  * @property-read \App\Models\Account|null $account
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ForumAnswer[] $answers
+ * @property-read int|null $answers_count
  * @property-read \App\Models\ForumSection $forumSection
+ * @property-read \App\Models\Project $project
  * @method static \Illuminate\Database\Eloquent\Builder|ForumTopic newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ForumTopic newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ForumTopic query()
@@ -45,6 +48,11 @@ class ForumTopic extends Model
     public function account(): BelongsTo
     {
         return $this->belongsTo(Account::class);
+    }
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
     }
 
     public function forumSection(): BelongsTo
