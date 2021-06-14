@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <nav class="navbar navbar-expand-sm navbar-dark">
+                        <nav class="navbar navbar-expand-sm navbar-dark d-flex justify-content-between">
                             <div id="navbarProject">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
@@ -38,6 +38,9 @@
                                            href="{{route('project', ['domain' => $project->domain, 'content' => 'forum'])}}">Форум</a>
                                     </li>
                                 </ul>
+                            </div>
+                            <div class="">
+                                @include('components.author', ['account' => $project->account])
                             </div>
                         </nav>
                     </div>

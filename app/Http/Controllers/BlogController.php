@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\BlogComment;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class BlogController extends Controller
@@ -66,5 +68,34 @@ class BlogController extends Controller
             'content' => 'blog',
             'login' => $account->login
         ])->with('success', 'Пост успешно создан!');
+    }
+
+    public function comment_create_post(Request $request, $login, $id)
+    {
+        $account = Account::whereLogin($login)->firstOrFail();
+
+        $validator = Validator::make(['id' => $id],
+            ['id' => 'integer']);
+        if ($validator->fails()) {
+            abort(404);
+        }
+
+        $post = $account->blogPosts()->findOrFail($id);
+
+        if (Gate::denies('create-blog-comment', $post)) {
+            abort(403);
+        }
+
+        Validator::validate($request->all(), [
+            'text' => 'required|max:500',
+        ]);
+
+        $comment = new BlogComment($request->all());
+        $comment->account()->associate(Auth::user());
+        $post->comments()->save($comment);
+
+        $accData = Account::getAccountDataByLogin($login);
+        return view('profile.blog.get', $accData)
+            ->with('post', $post);
     }
 }

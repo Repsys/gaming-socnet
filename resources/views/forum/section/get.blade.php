@@ -26,9 +26,7 @@
                     </div>
                     <div class="card-footer d-flex justify-content-between align-items-center">
                         <p class="card-text m-0"><small class="text-muted-light">{{$section->created_at}}</small></p>
-                        <p class="card-text m-0 text-right"><small class="text-muted-light ">Автор
-                                - {{$section->account->getFullName()}}</small>
-                        </p>
+                        @include('components.author', ['account' => $section->account])
                     </div>
                 </div>
             </div>
@@ -55,7 +53,7 @@
                                 </a>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <small class="text-muted-light">{{$topic->created_at}}</small>
-                                    @include('components.avatar-small', ['account' => $topic->account])
+                                    @include('components.author', ['account' => $topic->account])
                                 </div>
                             </div>
                         @endforeach

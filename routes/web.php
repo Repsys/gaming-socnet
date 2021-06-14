@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
     // Блог
     Route::get('/profile/blog/new', [BlogController::class, 'create'])->name('blog-create');
     Route::post('/profile/blog/new', [BlogController::class, 'create_post'])->name('blog-create_post');
+    Route::post('/profile/{login}/blog/{id}', [BlogController::class, 'comment_create_post'])->name('blog-comment-create_post');
 
     // Проекты
     Route::get('/profile/projects/new', [ProjectController::class, 'create'])->name('projects-create');

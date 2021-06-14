@@ -10,7 +10,12 @@
                                  alt="{{$project->preview_image}}">
                         </div>
                         <div class="col-12 col-lg-5 px-5 pr-lg-3 py-4 d-flex flex-column">
-                            <h4 class="card-title">{{$project->name}}</h4>
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h4 class="card-title m-0">{{$project->name}}</h4>
+                                @if(isset($with_author) && $with_author)
+                                    @include('components.author', ['account' => $project->account])
+                                @endif
+                            </div>
                             <p class="card-text">
                                 @include('components.output.output-text', [
                                     'text' => $project->about,

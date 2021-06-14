@@ -12,7 +12,7 @@
         <hr>
         <div class="row">
             <div class="col-12">
-                @include('projects.index')
+                @include('projects.index', ['with_author' => true])
             </div>
         </div>
     </div>

@@ -3,11 +3,11 @@
 namespace App\Providers;
 
 use App\Models\Account;
+use App\Models\BlogPost;
 use App\Models\ForumSection;
 use App\Models\ForumTopic;
 use App\Models\Project;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
@@ -30,6 +30,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        // Блог
+        Gate::define('create-blog-comment', function (Account $account, BlogPost $post) {
+            return true;
+        });
+
+        // Форум
         Gate::define('create-forum-section', function (Account $account, Project $project) {
             return $project->account->id == $account->id;
         });

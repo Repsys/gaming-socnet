@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
 /**
@@ -33,4 +34,14 @@ class BlogComment extends Model
     protected $fillable = [
         'text',
     ];
+
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(Account::class);
+    }
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(BlogPost::class, 'id', 'post_id');
+    }
 }

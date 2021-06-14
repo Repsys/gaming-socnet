@@ -16,11 +16,15 @@
                     <a href="{{route('forum-section', ['domain' => $project->domain, 'id' => $section->id])}}"
                        class="list-group-item-action text-light">
                         <h5>{{$section->title}}</h5>
-                        <p>{{$section->about}}</p>
+                        <p>
+                            @include('components.output.output-text', [
+                                'text' => $section->about,
+                            ])
+                        </p>
                     </a>
                     <div class="d-flex justify-content-between align-items-center">
                         <small class="text-muted-light">{{$section->created_at}}</small>
-                        @include('components.avatar-small', ['account' => $section->account])
+                        @include('components.author', ['account' => $section->account])
                     </div>
                 </div>
             @endforeach
