@@ -39,7 +39,7 @@
                        'name' => 'is_publisher'
                    ])
                     <div class="mt-4">
-                        <button type="submit" class="btn btn-success px-5">Создать аккаунт</button>
+                        <button type="submit" class="register-btn btn btn-success px-5">Создать аккаунт</button>
                     </div>
                 </form>
             </div>

@@ -52,6 +52,7 @@ class BlogController extends Controller
         ]);
 
         $post = new BlogPost($request->all());
+        $account->blogPosts()->save($post);
 
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->getClientOriginalExtension();
@@ -61,8 +62,8 @@ class BlogController extends Controller
             $fileName = 'no_preview.png';
         }
         $post->image = $fileName;
+        $post->save();
 
-        $account->blogPosts()->save($post);
 
         return redirect()->route('profile', [
             'content' => 'blog',

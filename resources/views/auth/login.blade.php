@@ -28,8 +28,8 @@
                        'name' => 'check_me_out'
                    ])
                     <div class="mt-4">
-                        <button type="submit" class="btn btn-success px-5 mr-2">Войти</button>
-                        <a href="{{route('register')}}" class="btn btn-primary px-5" role="button">Регистрация</a>
+                        <button type="submit" class="login-btn btn btn-success px-5 mr-2">Войти</button>
+                        <a href="{{route('register')}}" class="register-link btn btn-primary px-5" role="button">Регистрация</a>
                     </div>
                 </form>
             </div>

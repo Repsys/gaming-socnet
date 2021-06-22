@@ -24,7 +24,7 @@
             <ul class="navbar-nav">
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('login')}}">Вход</a>
+                        <a class="auth-link nav-link" href="{{route('login')}}">Вход</a>
                     </li>
                 @endguest
                 @auth

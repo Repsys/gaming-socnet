@@ -106,7 +106,7 @@ class ForumController extends Controller
     public function topic_create_post(Request $request, $domain, $sec_id)
     {
         $project = Project::getByDomainOrFail($domain);
-        $section = $project->forumSections()->find($sec_id)->firstOrFail();
+        $section = $project->forumSections()->findOrFail($sec_id);
 
         if (Gate::denies('create-forum-topic', $section)) {
             abort(403);
