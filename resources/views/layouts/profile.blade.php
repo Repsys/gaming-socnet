@@ -18,9 +18,9 @@
                     @yield('profile-buttons')
                     @if($isOwner)
                         @if($content == 'blog')
-                            <a class="btn btn-success mb-2 mb-lg-0 ml-lg-2" href="{{route('blog-create')}}">Добавить пост</a>
+                            <a class="blog-create-btn btn btn-success mb-2 mb-lg-0 ml-lg-2" href="{{route('blog-create')}}">Добавить пост</a>
                         @endif
-                        <a class="btn btn-primary mb-2 mb-lg-0 ml-lg-2" href="{{route('profile-edit')}}">Редактировать</a>
+                        <a class="profile-edit-btn btn btn-primary mb-2 mb-lg-0 ml-lg-2" href="{{route('profile-edit')}}">Редактировать</a>
                     @endif
                 </div>
             </div>

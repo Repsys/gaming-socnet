@@ -17,7 +17,7 @@
                 <div class="card-footer d-flex justify-content-between align-items-center">
                     <p class="card-text m-0"><small class="text-muted-light">{{$post->created_at}}</small></p>
                     <a href="{{route('blog-post', ['login' => $account->login, 'id' => $post->id])}}"
-                       class="btn btn-outline-info">Читать дальше</a>
+                       class="read-more-btn btn btn-outline-info">Читать дальше</a>
                 </div>
             </div>
         </div>

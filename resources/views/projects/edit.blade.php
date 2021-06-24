@@ -54,7 +54,7 @@
                     <div class="mt-4">
                         <a href="{{route('project', ['domain' => $project->domain])}}"
                            class="btn btn-secondary px-5 mr-2">Назад</a>
-                        <button type="submit" class="btn btn-success px-5">Сохранить</button>
+                        <button type="submit" class="project-save-btn btn btn-success px-5">Сохранить</button>
                     </div>
                 </form>
             </div>

@@ -30,7 +30,7 @@
                     <div class="mt-4">
                         <a href="{{route('profile', ['login' => $account->login, 'content' => 'blog'])}}"
                            class="btn btn-secondary px-5 mr-2">Назад</a>
-                        <button type="submit" class="btn btn-success px-5">Создать</button>
+                        <button type="submit" class="create-post-btn btn btn-success px-5">Создать</button>
                     </div>
                 </form>
             </div>

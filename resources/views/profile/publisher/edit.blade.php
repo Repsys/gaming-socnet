@@ -27,7 +27,7 @@
                     ])
                     <div class="mt-4">
                         <a href="{{route('profile')}}" class="btn btn-secondary px-5 mr-2">Назад</a>
-                        <button type="submit" class="btn btn-success px-5">Сохранить</button>
+                        <button type="submit" class="edit-save-btn btn btn-success px-5">Сохранить</button>
                     </div>
                 </form>
             </div>

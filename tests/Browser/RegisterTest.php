@@ -29,7 +29,8 @@ class RegisterTest extends DuskTestCase
                 ->check('is_publisher')
                 ->click('.register-btn')
                 ->assertPathIs('/login')
-                ->assertPresent('.alert-success');
+                ->assertPresent('.alert-success')
+                ->screenshot('RegisterTest');
         });
     }
 }

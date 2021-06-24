@@ -49,7 +49,7 @@
                     <div class="mt-4">
                         <a href="{{route('profile', ['login' => Auth::user()->login, 'content' => 'projects'])}}"
                            class="btn btn-secondary px-5 mr-2">Назад</a>
-                        <button type="submit" class="btn btn-success px-5">Создать</button>
+                        <button type="submit" class="create-project-btn btn btn-success px-5">Создать</button>
                     </div>
                 </form>
             </div>

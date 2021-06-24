@@ -67,7 +67,7 @@
                             'max' => 500
                         ])
                         <div class="mt-4">
-                            <button type="submit" class="btn btn-success px-5">Добавить</button>
+                            <button type="submit" class="add-comment-btn btn btn-success px-5">Добавить</button>
                         </div>
                     </form>
                 </div>

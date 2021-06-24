@@ -18,16 +18,23 @@ class LoginTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
 
-            $user = Account::factory([
-                'password' => bcrypt('qwe123asd')
-            ])->create();
+            $browser->visit('/')
+                ->click('.auth-link')
+                ->click('.register-link')
+                ->type('login', 'testUser')
+                ->type('email', 'testUser@mail.ru')
+                ->type('password', 'qwe123asd')
+                ->type('password_confirmation', 'qwe123asd')
+                ->click('.register-btn');
 
             $browser->visit('/')
                 ->click('.auth-link')
-                ->type('login', $user->login)
+                ->type('login', 'testUser')
                 ->type('password', 'qwe123asd')
                 ->click('.login-btn')
-                ->assertPathIs('/profile/edit');
+                ->screenshot('ggg')
+                ->assertPathIs('/profile/edit')
+                ->screenshot('LoginTest');
         });
     }
 }
